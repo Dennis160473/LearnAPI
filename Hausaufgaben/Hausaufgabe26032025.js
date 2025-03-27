@@ -13,6 +13,6 @@ app.get("/randomname", (req, res) => {
   ]);
 });
 
-app.listen(5050, () => {
-  console.log("Server läuft auf http://localhost:5050&quot;");
+app.listen(5012, () => {
+  console.log("Server läuft auf http://localhost:5012&quot;");
 });
