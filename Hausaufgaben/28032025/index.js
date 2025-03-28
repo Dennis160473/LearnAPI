@@ -67,4 +67,6 @@ app.get("/movie/:id", (req, res) => {
   }
 });
 
+// Zusatzaufgaben werden am WE in Angriff genommen!
+
 app.listen(5050);
