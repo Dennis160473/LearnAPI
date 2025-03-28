@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Der Name der Rose",
+    "year": "1986",
+    "actor": "Sean Connery"
+  },
+  {
+    "id": 2,
+    "title": "Titanic",
+    "year": "1997",
+    "actor": "Leonardo Di Caprio"
+  },
+  {
+    "id": 3,
+    "title": "Der Herr der Ringe",
+    "year": "2001",
+    "actor": "Elijah Wood"
+  },
+  {
+    "id": 4,
+    "title": "Der weiße Hai",
+    "year": "1975",
+    "actor": "Roy Scheider"
+  },
+  {
+    "id": 5,
+    "title": "Tarzan",
+    "year": "1981",
+    "actor": "Miles O'Keeffe"
+  }
+]
