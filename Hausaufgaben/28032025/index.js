@@ -56,4 +56,15 @@ app.delete("/movie/:id", (req, res) => {
   res.json("Delete complete: " + deletemovie[0].title);
 });
 
+app.get("/movie/:id", (req, res) => {
+  const id = req.params.id;
+  const foundtitle = movie.find((movie) => movie.id == id);
+
+  if (foundtitle) {
+    res.json(foundtitle);
+  } else {
+    res.status(404).send("User not found with ID: " + id);
+  }
+});
+
 app.listen(5050);
