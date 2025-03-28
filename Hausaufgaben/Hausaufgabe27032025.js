@@ -81,6 +81,8 @@ app.get("/pets/search", (req, res) => {
   res.json(result);
 });
 
+app.use(express.json());
+
 app.post("/pets", (req, res) => {
   const { Art, Stamm, Klasse, Ordnung, Familie, Gattung } = req.body; // Destructuring
   const newPet = {
@@ -96,6 +98,15 @@ app.post("/pets", (req, res) => {
   pets.push(newPet);
 
   res.json(pets);
+});
+
+app.put("/pets:id", (req, res) => {
+  const id = req.params.id;
+  const newfamily = req.body.Familie;
+
+  const foundpet = pets.find((user) => pets.id == id);
+  foundpet.Familie = newfamily;
+  res.json(foundpet);
 });
 
 app.listen(5050);
