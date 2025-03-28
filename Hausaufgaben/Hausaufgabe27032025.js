@@ -1,112 +1,38 @@
 const express = require("express");
 const app = express();
+const fs = require("fs");
+app.use(express.json());
 
-const pets = [
-  {
-    id: 1,
-    Art: "Löwe",
-    Stamm: "Wirbeltiere",
-    Klasse: "Säugetiere",
-    Ordnung: "Raubtiere",
-    Familie: "Katzen",
-    Gattung: "Großkatzen",
-  },
-  {
-    id: 2,
-    Art: "Wildrind",
-    Stamm: "Wirbeltiere",
-    Klasse: "Säugetiere",
-    Ordnung: "Paarhufer",
-    Familie: "Hornträger",
-    Gattung: "Eigentliche Rinder",
-  },
-  {
-    id: 3,
-    Art: "Weißer Hai",
-    Stamm: "Wirbeltiere",
-    Klasse: "Fische",
-    Ordnung: "Markrelenhaiartige",
-    Familie: "Markrelenhaie",
-    Gattung: "Carcharodon",
-  },
-  {
-    id: 4,
-    Art: "Anaconda",
-    Stamm: "Wirbeltiere",
-    Klasse: "Reptilien",
-    Ordnung: "Schlange",
-    Familie: "Boas",
-    Gattung: "Eunectes",
-  },
-  {
-    id: 5,
-    Art: "Skorpion",
-    Stamm: "Gliederfüßer",
-    Klasse: "Spinnentiere",
-    Ordnung: "Skorpione",
-    Familie: "Scorpionidae",
-    Gattung: "Scorpio",
-  },
-  {
-    id: 6,
-    Art: "Pelikan",
-    Stamm: "Wirbeltiere",
-    Klasse: "Vögel",
-    Ordnung: "Ruderfüßer",
-    Familie: "Pelikane",
-    Gattung: "Pelikane",
-  },
-];
+function readFile() {
+  const data = fs.readFileSync("Pets.json", "utf-8");
+  return JSON.parse(data);
+}
 
-app.get("/pets/", (req, res) => {
-  res.send(req.query);
+function writeFile(data) {
+  fs.writeFileSync("Pets.json", JSON.stringify(data, null, 2));
+}
+
+app.get("/Pets", (req, res) => {
+  const Pets = readFile();
+  res.json(Pets);
 });
 
-app.get("/pets/:id", (req, res) => {
-  const id = req.params.id;
-  const foundpet = pets.find((pets) => pets.id == id);
+app.post("/Pets", (req, res) => {
+  const Pets = readFile();
+  const { name, art } = req.body;
 
-  if (foundpet) {
-    res.json(foundpet);
+  if (name && art) {
+    const newpet = {
+      id: Pets.length + 1, // besser (komplexere Logik) -> tiere.length > 0 ? Math.max(...tiere.map(a => a.id)) + 1 : 1;
+      name: name,
+      art: art,
+    };
+    tiere.push(newTier);
+    writeFile(tiere);
+    res.status(201).json(newTier);
   } else {
-    res
-      .status(404)
-      .send("Kein Tier mit der ID in der Datenbank gefunden. ID: " + id);
+    res.send("Daten unvollständig");
   }
 });
 
-app.get("/pets/search", (req, res) => {
-  const Art = req.query.Artrt;
-  const result = pets.filter((pets) => pets.Art == Art);
-  res.json(result);
-});
-
-app.use(express.json());
-
-app.post("/pets", (req, res) => {
-  const { Art, Stamm, Klasse, Ordnung, Familie, Gattung } = req.body; // Destructuring
-  const newPet = {
-    id: pets.length + 1,
-    Art: Art,
-    Stamm: Stamm,
-    Klasse: Klasse,
-    Ordnung: Ordnung,
-    Familie: Familie,
-    Gattung: Gattung,
-  };
-
-  pets.push(newPet);
-
-  res.json(pets);
-});
-
-app.put("/pets:id", (req, res) => {
-  const id = req.params.id;
-  const newfamily = req.body.Familie;
-
-  const foundpet = pets.find((user) => pets.id == id);
-  foundpet.Familie = newfamily;
-  res.json(foundpet);
-});
-
-app.listen(5050);
+app.listen(5005);
