@@ -67,6 +67,23 @@ app.get("/movie/:id", (req, res) => {
   }
 });
 
-// Zusatzaufgaben werden am WE in Angriff genommen!
+app.get("movie/search", (req, res) => {
+  const movie = readFile();
+  const id = req.query.id;
+  let foundfilm = movies.filter((movie) => movie.id == id);
+  if (foundfilm.length === 0) {
+    const title = req.query.title;
+    foundfilm = movie.filter((movie) => movie.title == title);
+  }
+  if (foundfilm.length === 0) {
+    const year = req.query.title;
+    foundfilm = movie.filter((movie) => movie.year == year);
+  }
+  if (foundfilm.length === 0) {
+    const actor = req.query.title;
+    foundfilm = movie.filter((movie) => movie.actor == actor);
+  }
+  res.json(foundfilm);
+});
 
 app.listen(5050);
