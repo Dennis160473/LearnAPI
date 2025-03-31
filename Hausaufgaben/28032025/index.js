@@ -17,7 +17,6 @@ function readFile() {
 function writeFile(movie) {
   fs.writeFileSync("movie.json", JSON.stringify(movie, null, 2));
 }
-
 app.get("/movie", (req, res) => {
   try {
     const movie = readFile();
