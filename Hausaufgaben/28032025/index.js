@@ -3,11 +3,13 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const { title } = require("process");
-//const cors = require("cors")
+const cors = require("cors");
 app.use(express.json());
-//app.cors({
-//  origin: "http://localhost5050/movie",
-//});
+app.use(
+  cors({
+    origin: "http://localhost:5500",
+  })
+);
 
 function readFile() {
   const movie = fs.readFileSync("movie.json", "utf-8");
