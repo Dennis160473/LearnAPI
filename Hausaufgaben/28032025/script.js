@@ -24,11 +24,3 @@ submitButton.addEventListener("click", () => {
     console.log("fehler bei fetch: " + err);
   }
 });
-
-window.onload = () => {
-  fetch("http://localhost:5050/movie")
-    .then((res) => res.json())
-    .then((data) => {
-      antwortFeld.innerText = JSON.stringify(data);
-    });
-};

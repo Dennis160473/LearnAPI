@@ -3,13 +3,11 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const { title } = require("process");
-const cors = require("cors");
+//const cors = require("cors");
+const path = require("path");
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5500",
-  })
-);
+//app.use(cors({origin: "http://localhost:5500",}));
+app.use(express.static(path.join(__dirname, "frontend"))); // "frontend" ist der Ordner, indem die .html, .css und .js sich befinden.
 
 function readFile() {
   const movie = fs.readFileSync("movie.json", "utf-8");
